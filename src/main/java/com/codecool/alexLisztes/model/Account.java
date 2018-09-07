@@ -3,6 +3,8 @@ package com.codecool.alexLisztes.model;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
+import java.util.stream.Stream;
 
 public class Account {
 
@@ -84,5 +86,18 @@ public class Account {
         this.transactionList.add(t);
 
         return this.getBalance();
+    }
+
+    public void printTransactionHistory() {
+        ListIterator<Transaction> iter = this.transactionList.listIterator();
+
+        System.out.println(String.format("Transaction history of %s: ", this.getName()));
+
+        while (iter.hasNext()) {
+            Transaction t = iter.next();
+            System.out.println(t.toString());
+            System.out.println();
+        }
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
 }
