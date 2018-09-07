@@ -1,6 +1,7 @@
 package com.codecool.alexLisztes.model;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class Transfer extends Transaction {
 
@@ -41,5 +42,19 @@ public class Transfer extends Transaction {
         depo.doTransaction();
 
         return senderBalance;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder
+                .append("\t- ").append("Type: ").append(this.getClass().getName())
+                .append("\n")
+                .append("\t  ").append("Receiver: ").append(this.receiver.getName())
+                .append("\n")
+                .append("\t  ").append("Date: ").append(new Date(this.getDate()))
+                .append("\n")
+                .append("\t  ").append("Amount: ").append(this.getAmount().toString());
+        return stringBuilder.toString();
     }
 }

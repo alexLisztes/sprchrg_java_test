@@ -3,6 +3,8 @@ package com.codecool.alexLisztes.model;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
+//import java.util.stream.Stream;
 
 public class Account {
 
@@ -84,5 +86,52 @@ public class Account {
         this.transactionList.add(t);
 
         return this.getBalance();
+    }
+
+    public void printTransactionHistory() {
+        ListIterator<Transaction> iter = this.transactionList.listIterator();
+
+        System.out.println(String.format("Transaction history of %s: ", this.getName()));
+
+        // TODO: Make the stream version work...
+        while (iter.hasNext()) {
+            Transaction t = iter.next();
+            System.out.println(t.toString());
+            System.out.println();
+        }
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    }
+
+    public void printFilteredTransactionHistory(TransactionType type) {
+        ListIterator<Transaction> iter = this.transactionList.listIterator();
+
+        System.out.println(String.format("Listing the %s transactions of %s: ", type, this.getName()));
+
+
+        // TODO: Convert to streams
+        while (iter.hasNext()) {
+            Transaction t = iter.next();
+
+            switch (type) {
+                case TRANSFER:
+                    if (t instanceof Transfer) {
+                        System.out.println(t.toString());
+                        System.out.println();
+                    }
+                    break;
+                case DEPOSIT:
+                    if (t instanceof Deposit) {
+                        System.out.println(t.toString());
+                        System.out.println();
+                    }
+                    break;
+                case WITHDRAWAL:
+                    if (t instanceof Withdrawal) {
+                        System.out.println(t.toString());
+                        System.out.println();
+                    }
+            }
+        }
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
 }
