@@ -48,4 +48,16 @@ public abstract class Transaction {
     public void setAccount(Account account) {
         this.account = account;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder
+                .append("\t- ").append("Type: ").append(this.getClass().getName())
+                .append("\n")
+                .append("\t  ").append("Date: ").append(new Date(this.date))
+                .append("\n")
+                .append("\t  ").append("Amount: ").append(this.amount.toString());
+        return stringBuilder.toString();
+    }
 }
