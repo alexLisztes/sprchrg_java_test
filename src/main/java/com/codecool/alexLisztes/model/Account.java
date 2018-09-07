@@ -65,7 +65,21 @@ public class Account {
             case WITHDRAWAL:
                 t = new Withdrawal(amount, this);
                 break;
+            case TRANSFER:
+                throw new IllegalArgumentException("Cannot transfer money, Receiver is not specified!");
         }
+        t.doTransaction();
+        this.transactionList.add(t);
+
+        return this.getBalance();
+    }
+
+    public Balance performTransaction(BigDecimal amount, TransactionType type, Account receiver) {
+        if (type != TransactionType.TRANSFER) {
+            throw new IllegalArgumentException("Wrong transaction type!");
+        }
+
+        Transaction t = new Transfer(amount, this, receiver);
         t.doTransaction();
         this.transactionList.add(t);
 
